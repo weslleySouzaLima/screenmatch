@@ -1,33 +1,33 @@
+package br.com.alura.screenmatch.principal;
+
 import br.com.alura.screenmatch.calculos.CalculadoraDeTempo;
 import br.com.alura.screenmatch.calculos.FiltroRecomendacao;
 import br.com.alura.screenmatch.model.Episodio;
 import br.com.alura.screenmatch.model.Filme;
 import br.com.alura.screenmatch.model.Serie;
 
+import java.util.ArrayList;
+
 //metodo principal
 
 public class Principal {
     public static void main(String[] args) {
-        Filme filme = new Filme();
 
-        filme.setNome("o poderoso chefão");
-        filme.setAnoLancamento(1970);
-        filme.setDuracaoMinutos(180);
+        Filme meuFilme = new Filme(1970,"o poderoso chefão");
+        meuFilme.setDuracaoMinutos(180);
 
-        filme.exibeFichaTecnica();
-        filme.avalia(5);
-        filme.avalia(10);
-        filme.avalia(8);
-        System.out.println("Total de avaliações " + filme.getTotalAvaliacao());
-        System.out.println(filme.getMedia());
-        System.out.println("Duração do filme: " + filme.getDuracaoMinutos());
+        meuFilme.exibeFichaTecnica();
+        meuFilme.avalia(5);
+        meuFilme.avalia(10);
+        meuFilme.avalia(8);
+        System.out.println("Total de avaliações " + meuFilme.getTotalAvaliacao());
+        System.out.println(meuFilme.getMedia());
+        System.out.println("Duração do filme: " + meuFilme.getDuracaoMinutos());
 
 
 //        istanciando o objeto Serie
 
-        Serie lost = new Serie();
-        lost.setNome("Lost");
-        lost.setAnoLancamento(2000);
+        Serie lost = new Serie("Lost", 2000);
         lost.exibeFichaTecnica();
         lost.setTemporadas(10);
         lost.setEpsodiosTemporada(10);
@@ -36,16 +36,13 @@ public class Principal {
 
 //        istanciando o objeto Filme
 
-        Filme outroFilme = new Filme();
-
-        outroFilme.setNome("Avatar");
-        outroFilme.setAnoLancamento(2023);
+        Filme outroFilme = new Filme(2023,"Avatar");
         outroFilme.setDuracaoMinutos(200);
 
 //        istanciando o objeto CalculadoraDeTempo
 
         CalculadoraDeTempo calculadora = new CalculadoraDeTempo();
-        calculadora.inclui(filme);
+        calculadora.inclui(meuFilme);
         calculadora.inclui(outroFilme);
         calculadora.inclui(lost);
         System.out.println(calculadora.getTempoTotal());
@@ -53,7 +50,7 @@ public class Principal {
 //        istanciando o objeto FiltroRecomendacao
 
         FiltroRecomendacao filtro = new FiltroRecomendacao();
-        filtro.filtra(filme);
+        filtro.filtra(meuFilme);
 
 //        istanciando o objeto Episodio
 
@@ -62,5 +59,20 @@ public class Principal {
         episodio.setSerie("lost");
         episodio.setTotalVisualizacoes(300);
         filtro.filtra(episodio);
+
+        var filmeDoPaulo = new Filme(2003,"Dogville");
+        filmeDoPaulo.setDuracaoMinutos(200);
+        filmeDoPaulo.avalia(10);
+
+        ArrayList<Filme> listaDeFilmes = new ArrayList<>();
+        listaDeFilmes.add(filmeDoPaulo);
+        listaDeFilmes.add(outroFilme);
+        listaDeFilmes.add(meuFilme);
+        System.out.println("Tamanho da lista " + listaDeFilmes.size());
+        System.out.println("Primeiro filme " + listaDeFilmes.get(0).getNome());
+        System.out.println(listaDeFilmes);
+        System.out.println("toString do filme " + listaDeFilmes.get(0).toString());
+
+
     }
 }
